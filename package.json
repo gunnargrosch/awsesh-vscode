@@ -1,0 +1,244 @@
+{
+  "name": "awsesh-vscode",
+  "displayName": "Sesh",
+  "description": "Switch AWS SSO accounts, roles, and credentials from VS Code and compatible editors.",
+  "version": "0.1.0",
+  "publisher": "gunnargrosch",
+  "author": "Gunnar Grosch",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gunnargrosch/awsesh-vscode.git"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["aws", "sso", "credentials", "awsesh"],
+  "main": "./dist/extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In an untrusted workspace Sesh only shows the current credential. It does not write credentials or change terminal environment variables until the workspace is trusted."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "awsesh.switchCredentials",
+        "title": "Switch credentials",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.setCredentials",
+        "title": "Set credentials",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.clearCredentials",
+        "title": "Clear credentials",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.signIn",
+        "title": "Sign in",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.signOut",
+        "title": "Sign out",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.openConsole",
+        "title": "Open AWS Console",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.copyAccountId",
+        "title": "Copy account ID",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.copyProfile",
+        "title": "Copy profile name",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.openConfigDir",
+        "title": "Open config directory",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.openSettings",
+        "title": "Open settings",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.openDataDir",
+        "title": "Open data directory",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.openTui",
+        "title": "Open TUI",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.installCli",
+        "title": "Install awsesh CLI",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.bindWorkspace",
+        "title": "Bind workspace to current credential",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.clearWorkspaceBinding",
+        "title": "Clear workspace binding",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.applyWorkspaceProfile",
+        "title": "Apply workspace profile",
+        "category": "Sesh"
+      },
+      {
+        "command": "awsesh.refresh",
+        "title": "Refresh",
+        "category": "Sesh"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "awsesh",
+          "title": "Sesh",
+          "icon": "media/sesh.svg"
+        }
+      ]
+    },
+    "views": {
+      "awsesh": [
+        {
+          "id": "awsesh.sesh",
+          "name": "Sesh",
+          "icon": "media/sesh.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "awsesh.openConsole",
+          "when": "view == awsesh.sesh && viewItem == role"
+        },
+        {
+          "command": "awsesh.openConsole",
+          "when": "view == awsesh.sesh && viewItem == credential"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Sesh",
+      "properties": {
+        "awsesh.applyToTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Apply the active credential profile to integrated terminals."
+        },
+        "awsesh.statusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Sesh status bar item."
+        },
+        "awsesh.statusBar.template": {
+          "type": "string",
+          "default": "$(credit-card) {account} / {role}",
+          "markdownDescription": "Status bar text. Placeholders: `{account}`, `{accountId}`, `{role}`, `{profile}`, `{session}`, `{region}`."
+        },
+        "awsesh.credentialsExpiryWarningMinutes": {
+          "type": "number",
+          "default": 15,
+          "description": "Warn when the active credential expires within this many minutes."
+        },
+        "awsesh.binary": {
+          "type": "string",
+          "default": "awsesh",
+          "description": "Command or path used to launch the awsesh TUI."
+        },
+        "awsesh.workspace.session": {
+          "type": "string",
+          "description": "SSO session this workspace is bound to."
+        },
+        "awsesh.workspace.accountId": {
+          "type": "string",
+          "description": "AWS account ID this workspace is bound to."
+        },
+        "awsesh.workspace.role": {
+          "type": "string",
+          "description": "Role this workspace is bound to."
+        },
+        "awsesh.workspace.applyOnOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Apply the workspace binding automatically in trusted workspaces instead of prompting."
+        },
+        "awsesh.autoRefresh": {
+          "type": "boolean",
+          "default": false,
+          "description": "Refresh the active credential automatically before it expires."
+        },
+        "awsesh.autoRefreshMinutes": {
+          "type": "number",
+          "default": 5,
+          "description": "Refresh the active credential this many minutes before it expires."
+        },
+        "awsesh.configDir": {
+          "type": "string",
+          "default": "",
+          "description": "Override the awsesh configuration directory. Leave empty to use the XDG default."
+        },
+        "awsesh.dataDir": {
+          "type": "string",
+          "default": "",
+          "description": "Override the awsesh data directory. Leave empty to use the XDG default."
+        },
+        "awsesh.awsDir": {
+          "type": "string",
+          "default": "",
+          "description": "Override the AWS directory. Leave empty to use ~/.aws."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "bun run esbuild.mjs",
+    "watch": "bun run esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "typecheck:tests": "tsc -p tsconfig.test.json --noEmit",
+    "compile:tests": "tsc -p tsconfig.test.json",
+    "test": "bun test",
+    "test:integration": "bun run build && bun run compile:tests && node out/test/runTest.js",
+    "notices": "bun run script/gen-notices.ts",
+    "mock:data": "bun run script/mock-data.ts",
+    "package": "bun run build && vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@awsesh/core": "^1.4.5"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/test-electron": "^3.0.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.24.0",
+    "mocha": "^12.0.0",
+    "typescript": "^5.8.2"
+  }
+}
