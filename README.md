@@ -1,5 +1,13 @@
 # Sesh AWS SSO for VS Code and compatible editors
 
+[![VS Code Marketplace](https://vsmarketplacebadges.dev/version/gunnargrosch.awsesh-vscode.svg)](https://marketplace.visualstudio.com/items?itemName=gunnargrosch.awsesh-vscode)
+[![Open VSX](https://img.shields.io/open-vsx/v/gunnargrosch/awsesh-vscode)](https://open-vsx.org/extension/gunnargrosch/awsesh-vscode)
+[![CI](https://github.com/gunnargrosch/awsesh-vscode/actions/workflows/ci.yml/badge.svg)](https://github.com/gunnargrosch/awsesh-vscode/actions/workflows/ci.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)](https://www.typescriptlang.org/)
+[![Bun](https://img.shields.io/badge/Bun-1.4.2-black)](https://bun.sh/)
+[![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A520-green)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Switch AWS SSO accounts, roles, and credentials from VS Code and the editors
 built on the same extension API and Open VSX ecosystem, including Cursor, Kiro,
 Windsurf, and VSCodium. It uses [awsesh](https://github.com/elva-labs/awsesh) and
@@ -10,6 +18,14 @@ credentials, and profiles as the awsesh CLI, TUI, and desktop app, so switching
 here is visible everywhere else.
 
 ![Sesh in VS Code](media/screenshot.png)
+
+## Install
+
+Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=gunnargrosch.awsesh-vscode) or [Open VSX](https://open-vsx.org/extension/gunnargrosch/awsesh-vscode) for Cursor, Kiro, Windsurf, VSCodium, and other VS Code compatible editors.
+
+```sh
+code --install-extension gunnargrosch.awsesh-vscode
+```
 
 ## What it does
 
