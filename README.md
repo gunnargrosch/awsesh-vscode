@@ -1,4 +1,4 @@
-# Sesh for VS Code and compatible editors
+# Sesh AWS SSO for VS Code and compatible editors
 
 Switch AWS SSO accounts, roles, and credentials from VS Code and the editors
 built on the same extension API and Open VSX ecosystem, including Cursor, Kiro,

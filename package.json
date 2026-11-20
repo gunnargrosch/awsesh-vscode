@@ -1,8 +1,8 @@
 {
   "name": "awsesh-vscode",
-  "displayName": "Sesh",
+  "displayName": "Sesh AWS SSO",
   "description": "Switch AWS SSO accounts, roles, and credentials from VS Code and compatible editors.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "gunnargrosch",
   "author": "Gunnar Grosch",
   "license": "MIT",

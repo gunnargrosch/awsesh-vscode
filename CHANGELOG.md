@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.1.0
+## 0.1.1
 
-First public release.
+First public release. Published as **Sesh AWS SSO** (the Marketplace requires a
+unique display name).
 
 - Built on `@awsesh/core` 1.4.5, including compatibility with Sesh's
   `sessions/by-name` storage layout.
